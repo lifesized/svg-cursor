@@ -1,0 +1,14 @@
+{
+  "name": "svg-cursor",
+  "version": "1.0.0",
+  "description": "A tool for building SVG cursor patterns",
+  "main": "script.js",
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "start": "http-server"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "prettier": "^2.8.8"
+  }
+}
