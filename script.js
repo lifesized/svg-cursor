@@ -21,19 +21,21 @@ function updatePattern() {
     aspectRatio = parseFloat(customAspectRatio.value);
   } else {
     const [width, height] = aspectRatioSelect.value.split(':');
-    aspectRatio = parseFloat(width) / parseFloat(height);
+    aspectRatio = parseFloat(width) / parseFloat(height); // Changed back to original ratio
   }
 
-  // Set container height based on aspect ratio
-  const containerWidth = 800; // Fixed width
-  const containerHeight = containerWidth * (1 / aspectRatio);
-  
-  container.style.width = `${containerWidth}px`;
-  container.style.height = `${containerHeight}px`;
+  // Set fixed height and calculate width
+  const HEIGHT = 600;
+  const WIDTH = HEIGHT * aspectRatio;  // Changed multiplication order
 
-  // Set SVG viewBox
-  svg.setAttribute('viewBox', `0 0 ${containerWidth} ${containerHeight}`);
-  svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+  // Set container and SVG size
+  container.style.width = `${WIDTH}px`;
+  container.style.height = `${HEIGHT}px`;
+  
+  svg.setAttribute('width', WIDTH);
+  svg.setAttribute('height', HEIGHT);
+  svg.setAttribute('viewBox', `0 0 ${WIDTH} ${HEIGHT}`);
+  svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');  // Changed back to meet
 
   const patternType = document.getElementById('patternType').value;
   const sizeGradient = document.getElementById('sizeGradient').value;
@@ -46,14 +48,14 @@ function updatePattern() {
 
   // Update background rect to match new dimensions
   const background = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-  background.setAttribute('width', containerWidth);
-  background.setAttribute('height', containerHeight);
+  background.setAttribute('width', WIDTH);
+  background.setAttribute('height', HEIGHT);
   background.setAttribute('fill', backgroundColor);
   svg.appendChild(background);
 
   // Adjust pattern calculations for new dimensions
-  const numColumns = Math.floor(containerWidth / (size + spacing));
-  const numRows = Math.floor(containerHeight / (size + spacing));
+  const numColumns = Math.floor(WIDTH / (size + spacing));
+  const numRows = Math.floor(HEIGHT / (size + spacing));
 
   for (let row = 0; row < numRows; row++) {
     for (let col = 0; col < numColumns; col++) {
@@ -65,20 +67,20 @@ function updatePattern() {
       switch (sizeGradient) {
         case 'radial':
           const distanceFromCenter = Math.sqrt(
-            Math.pow(x - containerWidth / 2, 2) + Math.pow(y - containerHeight / 2, 2)
+            Math.pow(x - WIDTH / 2, 2) + Math.pow(y - HEIGHT / 2, 2)
           );
-          const maxDistance = Math.sqrt(Math.pow(containerWidth / 2, 2) + Math.pow(containerHeight / 2, 2));
+          const maxDistance = Math.sqrt(Math.pow(WIDTH / 2, 2) + Math.pow(HEIGHT / 2, 2));
           sizeMultiplier = 1 - distanceFromCenter / maxDistance;
           break;
         case 'angular':
-          const angle = Math.atan2(y - containerHeight / 2, x - containerWidth / 2);
+          const angle = Math.atan2(y - HEIGHT / 2, x - WIDTH / 2);
           sizeMultiplier = (Math.sin(angle) + 1) / 2;
           break;
         case 'wave':
           sizeMultiplier = Math.sin((x + y) / 50) * 0.5 + 0.5;
           break;
         case 'linear':
-          sizeMultiplier = 1 - y / containerHeight;
+          sizeMultiplier = 1 - y / HEIGHT;
           break;
       }
 

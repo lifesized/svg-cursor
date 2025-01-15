@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  max-width: 800px;
+  max-width: none;
   margin: 0 auto;
   padding: 20px;
   background-color: #f0f0f0;
@@ -91,18 +91,16 @@ body {
 }
 
 #patternContainer {
-  width: 800px;
-  height: auto;
+  height: 600px;
+  margin: 20px auto;
   border: 1px solid #ccc;
-  margin: 20px;
-  overflow: hidden;
   background: #fff;
-  position: relative;
+  overflow: visible;
 }
 
 #patternContainer svg {
   display: block;
-  width: 100%;
+  width: auto;
   height: 100%;
 }
 
