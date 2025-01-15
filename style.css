@@ -91,14 +91,10 @@ body {
 }
 
 #patternContainer {
-  width: 50%; /* Changed from 100% to 50% */
-  height: 0;
-  padding-bottom: 50%; /* Changed from 100% to 50% */
-  border: 1px solid black;
-  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  margin: 20px;
   overflow: hidden;
-  background-color: #fff;
-  position: relative;
+  background: #fff;
 }
 
 #patternContainer svg {

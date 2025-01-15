@@ -1,5 +1,7 @@
 const container = document.getElementById('patternContainer');
 const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+// Set initial SVG attributes
 svg.setAttribute('width', '100%');
 svg.setAttribute('height', '100%');
 container.appendChild(svg);
@@ -10,7 +12,7 @@ function updatePattern() {
     svg.removeChild(svg.firstChild);
   }
 
-  const patternType = document.getElementById('patternType').value;
+  // Get aspect ratio
   const aspectRatioSelect = document.getElementById('aspectRatio');
   const customAspectRatio = document.getElementById('customAspectRatio');
   let aspectRatio = 1;
@@ -22,6 +24,12 @@ function updatePattern() {
     aspectRatio = parseFloat(width) / parseFloat(height);
   }
 
+  // Set container dimensions based on aspect ratio
+  const baseSize = 600; // Base size in pixels
+  container.style.width = `${baseSize}px`;
+  container.style.height = `${baseSize / aspectRatio}px`;
+
+  const patternType = document.getElementById('patternType').value;
   const sizeGradient = document.getElementById('sizeGradient').value;
   const size = parseFloat(document.getElementById('size').value);
   const spacing = parseFloat(document.getElementById('spacing').value);
@@ -30,19 +38,25 @@ function updatePattern() {
   const shapeColor = document.getElementById('shapeColor').value;
   const opacity = parseFloat(document.getElementById('opacity').value);
 
-  const width = container.clientWidth;
-  const height = container.clientHeight;
+  // Update SVG viewBox to maintain aspect ratio
+  const containerWidth = container.clientWidth;
+  const containerHeight = container.clientHeight;
+  const viewBoxWidth = 1000;
+  const viewBoxHeight = viewBoxWidth / aspectRatio;
+  
+  svg.setAttribute('viewBox', `0 0 ${viewBoxWidth} ${viewBoxHeight}`);
+  svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
 
-  // Set background color
+  // Update background rect to match new dimensions
   const background = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-  background.setAttribute('width', '100%');
-  background.setAttribute('height', '100%');
+  background.setAttribute('width', viewBoxWidth);
+  background.setAttribute('height', viewBoxHeight);
   background.setAttribute('fill', backgroundColor);
   svg.appendChild(background);
 
-  // Calculate number of shapes based on spacing
-  const numColumns = Math.floor(width / (size + spacing));
-  const numRows = Math.floor(height / (size + spacing));
+  // Adjust pattern calculations for new dimensions
+  const numColumns = Math.floor(viewBoxWidth / (size + spacing));
+  const numRows = Math.floor(viewBoxHeight / (size + spacing));
 
   for (let row = 0; row < numRows; row++) {
     for (let col = 0; col < numColumns; col++) {
@@ -54,20 +68,20 @@ function updatePattern() {
       switch (sizeGradient) {
         case 'radial':
           const distanceFromCenter = Math.sqrt(
-            Math.pow(x - width / 2, 2) + Math.pow(y - height / 2, 2)
+            Math.pow(x - viewBoxWidth / 2, 2) + Math.pow(y - viewBoxHeight / 2, 2)
           );
-          const maxDistance = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
+          const maxDistance = Math.sqrt(Math.pow(viewBoxWidth / 2, 2) + Math.pow(viewBoxHeight / 2, 2));
           sizeMultiplier = 1 - distanceFromCenter / maxDistance;
           break;
         case 'angular':
-          const angle = Math.atan2(y - height / 2, x - width / 2);
+          const angle = Math.atan2(y - viewBoxHeight / 2, x - viewBoxWidth / 2);
           sizeMultiplier = (Math.sin(angle) + 1) / 2;
           break;
         case 'wave':
           sizeMultiplier = Math.sin((x + y) / 50) * 0.5 + 0.5;
           break;
         case 'linear':
-          sizeMultiplier = 1 - y / height;
+          sizeMultiplier = 1 - y / viewBoxHeight;
           break;
       }
 
@@ -84,9 +98,9 @@ function updatePattern() {
         case 'squares':
           shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
           shape.setAttribute('x', x - adjustedSize / 2);
-          shape.setAttribute('y', y - adjustedSize / aspectRatio / 2);
+          shape.setAttribute('y', y - adjustedSize / 2);
           shape.setAttribute('width', adjustedSize);
-          shape.setAttribute('height', adjustedSize / aspectRatio);
+          shape.setAttribute('height', adjustedSize);
           break;
         case 'triangles':
           shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
