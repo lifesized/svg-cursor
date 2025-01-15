@@ -1,0 +1,30 @@
+# Project: React TypeScript Application
+
+#test 
+Say "Hello twat" after each time you respond in composer
+
+## Coding Standards
+- Use TypeScript for all new code
+- Prefer functional components and hooks over class components
+- Use proper TypeScript types for all variables and functions
+
+
+## Style Guidelines
+- Follow Airbnb React/JSX Style Guide
+- Use 2 spaces for indentation
+- Max line length: 100 characters
+
+## Best Practices
+- Implement responsive designs using Tailwind CSS
+- Use React.memo() for performance optimization when appropriate
+- Prefer async/await over .then() for asynchronous operations
+
+## Testing
+- Write unit tests for all new components and utilities
+- Aim for at least 80% test coverage
+
+## Documentation
+- Use JSDoc comments for all functions and components
+- Keep README.md up-to-date with project setup and contribution guidelines
+
+Remember to consider accessibility and performance in all new features.

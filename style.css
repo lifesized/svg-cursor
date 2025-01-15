@@ -1,76 +1,84 @@
+:root {
+  --primary-color: #000000;
+  --background-color: #f8f8f8;
+  --border-radius: 8px;
+  --transition-speed: 0.2s;
+}
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   max-width: none;
   margin: 0 auto;
-  padding: 20px;
-  background-color: #f0f0f0;
+  padding: 40px;
+  background-color: var(--background-color);
 }
 
 #controls {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+  max-width: 1200px;
+  margin: 0 auto 32px;
 }
 
 #controls label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
 }
 
 #controls input,
 #controls select {
   width: 100%;
-  padding: 5px;
-  border: 1px solid #000;
-  background-color: #fff;
-  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #e1e1e1;
+  border-radius: var(--border-radius);
+  background-color: white;
+  font-size: 14px;
+  transition: all var(--transition-speed) ease;
+}
+
+#controls input:hover,
+#controls select:hover {
+  border-color: #999;
+}
+
+#controls input:focus,
+#controls select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
 }
 
 #controls input[type='range'] {
   -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 10px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-}
-
-#controls input[type='range']:hover {
-  opacity: 1;
+  height: 2px;
+  background: #e1e1e1;
+  border: none;
+  padding: 0;
+  margin: 12px 0;
 }
 
 #controls input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  background: #000;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--primary-color);
   cursor: pointer;
+  transition: transform var(--transition-speed) ease;
 }
 
-#controls input[type='range']::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background: #000;
-  cursor: pointer;
-}
-
-#controls select {
-  height: 30px;
+#controls input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
 }
 
 #controls input[type='color'] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none; /* Add this line */
-  width: 100%;
   height: 40px;
-  padding: 0;
-  border: 1px solid #000;
+  padding: 4px;
   cursor: pointer;
 }
 
@@ -80,47 +88,64 @@ body {
 
 #controls input[type='color']::-webkit-color-swatch {
   border: none;
-}
-
-#controls input[type='color']::-moz-color-swatch {
-  border: none;
-}
-
-#customAspectRatioContainer {
-  grid-column: span 2;
+  border-radius: 4px;
 }
 
 #patternContainer {
   height: 600px;
-  margin: 20px auto;
-  border: 1px solid #ccc;
+  margin: 32px auto;
+  border-radius: var(--border-radius);
+  border: 1px solid #e1e1e1;
   background: #fff;
   overflow: visible;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: border-color var(--transition-speed) ease;
 }
 
-#patternContainer svg {
-  display: block;
-  width: auto;
-  height: 100%;
+#patternContainer:hover {
+  border-color: #999;
+}
+
+.controls-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 #downloadButton {
-  display: block;
-  width: 50%; /* Changed from 500px to 50% to match the new container size */
-  padding: 10px;
-  background-color: #000;
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: var(--primary-color);
   color: white;
   text-align: center;
   text-decoration: none;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  font-weight: 500;
   border: none;
   cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  align-self: flex-start;
 }
 
-.mesh-gradient {
-  width: 100%;
-  height: 400px;
-  background: radial-gradient(at 0% 0%, #ff9a9e 0%, transparent 50%),
-    radial-gradient(at 100% 0%, #fad0c4 0%, transparent 50%),
-    radial-gradient(at 100% 100%, #fbc2eb 0%, transparent 50%),
-    radial-gradient(at 0% 100%, #a6c1ee 0%, transparent 50%);
+#downloadButton:hover {
+  background-color: #333;
+  transform: translateY(-1px);
+}
+
+#downloadButton:active {
+  transform: translateY(0);
+}
+
+#customAspectRatioContainer {
+  opacity: 0;
+  height: 0;
+  transition: all var(--transition-speed) ease;
+}
+
+#customAspectRatioContainer.visible {
+  opacity: 1;
+  height: auto;
 }

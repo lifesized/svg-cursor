@@ -54,13 +54,17 @@ function updatePattern() {
   svg.appendChild(background);
 
   // Adjust pattern calculations for new dimensions
-  const numColumns = Math.floor(WIDTH / (size + spacing));
-  const numRows = Math.floor(HEIGHT / (size + spacing));
+  const numColumns = Math.ceil(WIDTH / (size + spacing)) + 1;
+  const numRows = Math.ceil(HEIGHT / (size + spacing)) + 1;
+
+  // Center the pattern
+  const startX = -size/2;  // Start slightly off-screen
+  const startY = -size/2;
 
   for (let row = 0; row < numRows; row++) {
     for (let col = 0; col < numColumns; col++) {
-      const x = col * (size + spacing) + size / 2;
-      const y = row * (size + spacing) + size / 2;
+      const x = startX + col * (size + spacing) + size / 2;
+      const y = startY + row * (size + spacing) + size / 2;
 
       // Calculate size based on gradient
       let sizeMultiplier = 1;
@@ -170,15 +174,12 @@ document.querySelectorAll('#controls input, #controls select').forEach(control =
 
 // Special handler for aspect ratio
 document.getElementById('aspectRatio').addEventListener('change', function () {
-  const customAspectRatioContainer = document.getElementById('customAspectRatioContainer');
-
+  const customContainer = document.getElementById('customAspectRatioContainer');
   if (this.value === 'custom') {
-    customAspectRatioContainer.style.display = 'block';
+    customContainer.classList.add('visible');
   } else {
-    customAspectRatioContainer.style.display = 'none';
+    customContainer.classList.remove('visible');
   }
-
-  updatePattern();
 });
 
 // Initial pattern generation
