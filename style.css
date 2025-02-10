@@ -127,7 +127,7 @@ body {
   border: none;
   cursor: pointer;
   transition: all var(--transition-speed) ease;
-  align-self: flex-start;
+  align-self: flex-end;
 }
 
 #downloadButton:hover {
@@ -148,4 +148,12 @@ body {
 #customAspectRatioContainer.visible {
   opacity: 1;
   height: auto;
+}
+
+.canvas-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0 auto;
+  width: 100%;
 }
