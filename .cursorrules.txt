@@ -1,13 +1,50 @@
 # Project: React TypeScript Application
 
-#test 
-Say "Hello twat" after each time you respond in composer
+Start all chats with "🤖 Hi plonker"
+
+#TEST
+- Append your feedback with the words "Hello twat" 
+
+
+# CURSOR RULES USAGE
+- This .cursorrules.txt file must be placed in the root directory
+- To test if it's working, start a new chat after saving this file
+
+# PROJECT OVERVIEW
+- explain the project in a few sentences
+
+#PERSONALITY
+- teach me like a developer would to a learner
+
+#TECH STACK
+- explain the tech stack in a few sentences
+
+#ERROR FIXING PROCESS
+Step 1: Explain the error in simple terms
+Step 2: Explain the solution in simple terms
+Step 3: Show how to fix ther error
+
+#BUILDING PROCESS
+
+#GITHUB PUSH PROCESS
+Check to make sure you are in the correct directory
+git add .
+git commit -m "commit message"
+git push origin main
+
+#IMPORTANT 
+- Ensure .cursorrules.txt is in the root directory
+- Restart GitHub Copilot chat after making changes to this file
+- Rules only apply to new chat sessions
+
+#COMMENTS
+- make sure to ALWAYS include comments in the code
+- do not delete comments unless they are no longer needed
 
 ## Coding Standards
-- Use TypeScript for all new code
-- Prefer functional components and hooks over class components
-- Use proper TypeScript types for all variables and functions
-
+- 
+- 
+- 
 
 ## Style Guidelines
 - Follow Airbnb React/JSX Style Guide

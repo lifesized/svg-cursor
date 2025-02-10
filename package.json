@@ -5,7 +5,7 @@
   "main": "script.js",
   "scripts": {
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
-    "start": "http-server"
+    "start": "http-server -p 5000"
   },
   "devDependencies": {
     "http-server": "^14.1.1",
