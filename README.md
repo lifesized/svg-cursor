@@ -1,4 +1,4 @@
-# SVG Cursor
+# SVG Generator
 
 An interactive tool for creating and customizing SVG pattern designs. This project allows users to generate various SVG patterns with customizable properties like shapes, sizes, colors, and gradients.
 
