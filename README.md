@@ -1,4 +1,4 @@
-# SVG Generator
+# SVG Generator 
 
 An interactive tool for creating and customizing SVG pattern designs. This project allows users to generate various SVG patterns with customizable properties like shapes, sizes, colors, and gradients.
 
@@ -30,7 +30,7 @@ This is was a "Hello World" project for me to learn how to tackle a simple proje
 2. Install dependencies:
 3. Start the development server:
 
-4. Open your browser and navigate to `http://localhost:3000`
+4. Open your browser and navigate to `http://localhost:5000
 
 ## Usage
 
